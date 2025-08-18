@@ -44,7 +44,13 @@ app.use('/api/', limiter);
 
 // CORS configuration
 app.use(cors({
-  origin: config.IS_PRODUCTION ? config.FRONTEND_URL : ['http://localhost:5173', 'http://localhost:3000'],
+  origin: config.IS_PRODUCTION 
+    ? [
+        'https://nyeri-stays001.vercel.app',
+        'https://nyeri-stays001.vercel.app/',
+        config.FRONTEND_URL
+      ] 
+    : ['http://localhost:5173', 'http://localhost:3000'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization'],

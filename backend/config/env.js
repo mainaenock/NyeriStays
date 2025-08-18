@@ -15,7 +15,7 @@ const config = {
   JWT_EXPIRE: process.env.JWT_EXPIRE || '7d',
   
   // Frontend URL (for CORS and email links)
-  FRONTEND_URL: process.env.FRONTEND_URL || 'http://localhost:5173',
+  FRONTEND_URL: process.env.FRONTEND_URL || 'https://nyeri-stays001.vercel.app',
   
   // Email Configuration
   EMAIL_FROM: process.env.EMAIL_FROM || 'nyeristays@gmail.com',

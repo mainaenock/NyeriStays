@@ -126,7 +126,6 @@ bookingSchema.index({ property: 1, checkIn: 1, checkOut: 1 });
 bookingSchema.index({ guest: 1, createdAt: -1 });
 bookingSchema.index({ host: 1, createdAt: -1 });
 bookingSchema.index({ status: 1 });
-bookingSchema.index({ bookingCode: 1 });
 
 // Generate booking code function
 const generateBookingCode = async () => {
