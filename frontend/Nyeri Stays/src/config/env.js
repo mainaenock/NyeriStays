@@ -1,8 +1,11 @@
 // Environment configuration
-export const config = {
+export const config = { 
   // API Configuration
   API_BASE_URL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000/api',
   BACKEND_PORT: import.meta.env.VITE_BACKEND_PORT || '4000',
+  
+  // Backend Base URL (for images and other resources)
+  BACKEND_URL: import.meta.env.VITE_BACKEND_URL || 'http://localhost:4000',
   
   // Frontend Configuration
   FRONTEND_URL: import.meta.env.VITE_FRONTEND_URL || 'http://localhost:5173',

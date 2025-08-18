@@ -4,13 +4,30 @@
 
 To configure the frontend to connect to your backend, create a `.env` file in the frontend root directory with the following variables:
 
+### Development (Local)
 ```env
 # Backend API Configuration
 VITE_API_BASE_URL=http://localhost:4000/api
 VITE_BACKEND_PORT=4000
 
+# Backend Base URL (for images and resources)
+VITE_BACKEND_URL=http://localhost:4000
+
 # Frontend Configuration (optional)
 VITE_FRONTEND_URL=http://localhost:5173
+```
+
+### Production (Vercel Deployment)
+```env
+# Backend API Configuration
+VITE_API_BASE_URL=https://nyeristays.onrender.com/api
+VITE_BACKEND_PORT=443
+
+# Backend Base URL (for images and resources)
+VITE_BACKEND_URL=https://nyeristays.onrender.com
+
+# Frontend Configuration
+VITE_FRONTEND_URL=https://nyeri-stays001.vercel.app
 ```
 
 ## Default Values
@@ -28,16 +45,19 @@ If no `.env` file is provided, the application will use these default values:
 3. Save the file
 4. Restart your development server
 
-## Example .env File
+## Vercel Deployment
 
-```env
-# Backend API Configuration
-VITE_API_BASE_URL=http://localhost:4000/api
-VITE_BACKEND_PORT=4000
+For Vercel deployment, you need to:
 
-# Frontend Configuration
-VITE_FRONTEND_URL=http://localhost:5173
-```
+1. **Create `.env` file** with production values (see above)
+2. **Add Environment Variables in Vercel Dashboard**:
+   - Go to your Vercel project settings
+   - Navigate to "Environment Variables"
+   - Add:
+     - `VITE_API_BASE_URL` = `https://nyeristays.onrender.com/api`
+     - `VITE_BACKEND_PORT` = `443`
+     - `VITE_BACKEND_URL` = `https://nyeristays.onrender.com`
+     - `VITE_FRONTEND_URL` = `https://nyeri-stays001.vercel.app`
 
 ## Testing the Connection
 
@@ -61,7 +81,8 @@ If the API test fails:
 For production deployment, update the environment variables to point to your production backend URL:
 
 ```env
-VITE_API_BASE_URL=https://your-production-backend.com/api
+VITE_API_BASE_URL=https://nyeristays.onrender.com/api
 VITE_BACKEND_PORT=443
-VITE_FRONTEND_URL=https://your-production-frontend.com
+VITE_BACKEND_URL=https://nyeristays.onrender.com
+VITE_FRONTEND_URL=https://nyeri-stays001.vercel.app
 ``` 

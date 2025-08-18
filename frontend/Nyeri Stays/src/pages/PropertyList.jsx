@@ -4,6 +4,7 @@ import { useSearchParams } from 'react-router-dom'
 import PropertyCard from '../components/PropertyCard'
 import PropertyCardSkeleton from '../components/PropertyCardSkeleton'
 import { propertiesAPI } from '../services/api'
+import { config } from '../config/env'
 
 const PropertyList = () => {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -58,7 +59,7 @@ const PropertyList = () => {
     rating: property.ratings.average || 0,
     reviews: property.ratings.totalReviews || 0,
     image: property.images && property.images.length > 0 
-      ? `http://localhost:4000${property.images[0].url}`
+      ? `${config.backendUrl}${property.images[0].url}`
       : '/placeholder-property.jpg',
     amenities: property.amenities || [],
     description: property.description,

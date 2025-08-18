@@ -7,6 +7,7 @@ import StarRating from '../components/StarRating'
 import ReviewForm from '../components/ReviewForm'
 import ReviewList from '../components/ReviewList'
 import AdminContactButtons from '../components/AdminContactButtons'
+import { config } from '../config/env'
 
 const PropertyDetail = () => {
   const { id } = useParams()
@@ -82,7 +83,7 @@ const PropertyDetail = () => {
           // Handle both string URLs and object URLs
           const imageUrl = typeof img === 'string' ? img : img.url;
           // Ensure proper URL construction
-          return imageUrl.startsWith('http') ? imageUrl : `http://localhost:4000${imageUrl}`;
+          return imageUrl.startsWith('http') ? imageUrl : `${config.backendUrl}${imageUrl}`;
         })
       : [],
     amenities: property.amenities || [],

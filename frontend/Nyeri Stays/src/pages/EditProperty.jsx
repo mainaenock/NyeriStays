@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { propertiesAPI } from '../services/api';
 import HostNavbar from '../components/HostNavbar';
+import { config } from '../config/env';
 
 const EditProperty = () => {
   const navigate = useNavigate();
@@ -550,7 +551,7 @@ const EditProperty = () => {
                       {formData.images.map((image, index) => (
                         <div key={index} className="relative group">
                           <img
-                            src={image.url ? `http://localhost:4000${image.url}` : URL.createObjectURL(image)}
+                            src={image.url ? `${config.backendUrl}${image.url}` : URL.createObjectURL(image)}
                             alt={`Property image ${index + 1}`}
                             className="w-full h-32 object-cover rounded-lg"
                           />

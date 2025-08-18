@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { 
   Plus, 
   Home, 
@@ -11,12 +11,22 @@ import {
   Trash2,
   Users,
   TrendingUp,
-  Settings
+  Settings,
+  ArrowRight,
+  MapPin,
+  Shield,
+  Award,
+  Clock,
+  Play,
+  CheckCircle,
+  HelpCircle,
+  Globe
 } from 'lucide-react';
 import { propertiesAPI, bookingsAPI } from '../services/api';
 import { useAuth } from '../contexts/AuthContext';
 import HostNavbar from '../components/HostNavbar';
 import BookingNotification from '../components/BookingNotification';
+import { config } from '../config/env';
 
 const HostDashboard = () => {
   const { user } = useAuth();
@@ -30,6 +40,7 @@ const HostDashboard = () => {
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchHostData();
@@ -229,7 +240,7 @@ const HostDashboard = () => {
                     <div className="aspect-w-16 aspect-h-9 bg-gray-200">
                       {property.images && property.images.length > 0 ? (
                         <img
-                          src={`http://localhost:4000${property.images[0].url}`}
+                          src={`${config.backendUrl}${property.images[0].url}`}
                           alt={property.title}
                           className="w-full h-40 sm:h-48 object-cover"
                         />
