@@ -1,0 +1,67 @@
+# Environment Variables Setup
+
+## Frontend Environment Variables
+
+To configure the frontend to connect to your backend, create a `.env` file in the frontend root directory with the following variables:
+
+```env
+# Backend API Configuration
+VITE_API_BASE_URL=http://localhost:4000/api
+VITE_BACKEND_PORT=4000
+
+# Frontend Configuration (optional)
+VITE_FRONTEND_URL=http://localhost:5173
+```
+
+## Default Values
+
+If no `.env` file is provided, the application will use these default values:
+
+- **API Base URL**: `http://localhost:4000/api`
+- **Backend Port**: `4000`
+- **Frontend URL**: `http://localhost:5173`
+
+## How to Create .env File
+
+1. In the frontend directory (`frontend/Nyeri Stays/`), create a new file named `.env`
+2. Add the environment variables listed above
+3. Save the file
+4. Restart your development server
+
+## Example .env File
+
+```env
+# Backend API Configuration
+VITE_API_BASE_URL=http://localhost:4000/api
+VITE_BACKEND_PORT=4000
+
+# Frontend Configuration
+VITE_FRONTEND_URL=http://localhost:5173
+```
+
+## Testing the Connection
+
+The application includes an API test component that will automatically test the connection to the backend when you visit the home page. This will help verify that:
+
+1. The backend is running
+2. The API endpoints are accessible
+3. The CORS configuration is working correctly
+
+## Troubleshooting
+
+If the API test fails:
+
+1. **Check if backend is running**: Ensure your backend server is running on port 4000
+2. **Verify CORS settings**: Make sure the backend CORS configuration allows requests from `http://localhost:5173`
+3. **Check network connectivity**: Ensure there are no firewall or network issues
+4. **Verify environment variables**: Double-check that your `.env` file is in the correct location and has the right values
+
+## Production Deployment
+
+For production deployment, update the environment variables to point to your production backend URL:
+
+```env
+VITE_API_BASE_URL=https://your-production-backend.com/api
+VITE_BACKEND_PORT=443
+VITE_FRONTEND_URL=https://your-production-frontend.com
+``` 
