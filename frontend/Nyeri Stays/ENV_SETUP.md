@@ -23,6 +23,10 @@ VITE_FRONTEND_URL=http://localhost:5173
 VITE_API_BASE_URL=https://nyeristays.onrender.com/api
 VITE_BACKEND_URL=https://nyeristays.onrender.com
 
+# Cloudinary Configuration (optional)
+VITE_CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+VITE_CLOUDINARY_UPLOAD_PRESET=your_cloudinary_upload_preset
+
 # Frontend Configuration
 VITE_FRONTEND_URL=https://nyeri-stays001.vercel.app
 

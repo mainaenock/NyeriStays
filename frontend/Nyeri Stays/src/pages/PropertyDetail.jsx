@@ -7,7 +7,7 @@ import StarRating from '../components/StarRating'
 import ReviewForm from '../components/ReviewForm'
 import ReviewList from '../components/ReviewList'
 import AdminContactButtons from '../components/AdminContactButtons'
-import { config } from '../config/env'
+import { getImageURL } from '../config/env'
 
 const PropertyDetail = () => {
   const { id } = useParams()
@@ -82,8 +82,8 @@ const PropertyDetail = () => {
       ? property.images.map(img => {
           // Handle both string URLs and object URLs
           const imageUrl = typeof img === 'string' ? img : img.url;
-          // Ensure proper URL construction
-          return imageUrl.startsWith('http') ? imageUrl : `${config.BACKEND_URL}${imageUrl}`;
+          // Use the helper function to get proper URL
+          return getImageURL(imageUrl);
         })
       : [],
     amenities: property.amenities || [],

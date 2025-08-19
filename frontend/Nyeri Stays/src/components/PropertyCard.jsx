@@ -2,20 +2,10 @@ import { useState } from 'react'
 import { Heart, MapPin, Wifi, Coffee, Car, Mountain, Star, Users } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import StarRating from './StarRating'
-import { config } from '../config/env'
+import { getImageURL } from '../config/env'
 
 const PropertyCard = ({ property }) => {
   const [isLiked, setIsLiked] = useState(false)
-
-  // Helper function to get full image URL
-  const getImageUrl = (imageUrl) => {
-    if (!imageUrl) return 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80';
-    if (imageUrl.startsWith('http')) return imageUrl; // Already a full URL
-    if (imageUrl.startsWith('/uploads')) {
-      return `${config.BACKEND_URL}${imageUrl}`; // Convert relative path to full URL
-    }
-    return imageUrl;
-  }
 
   const getAmenityIcon = (amenity) => {
     switch (amenity.toLowerCase()) {
@@ -39,7 +29,7 @@ const PropertyCard = ({ property }) => {
         {/* Image Container */}
         <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
           <img
-            src={getImageUrl(property.images?.[0]?.url || property.image)}
+            src={getImageURL(property.images?.[0]?.url || property.image)}
             alt={property.title || 'Property'}
             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
             onError={(e) => {

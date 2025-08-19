@@ -26,7 +26,7 @@ import { propertiesAPI, bookingsAPI } from '../services/api';
 import { useAuth } from '../contexts/AuthContext';
 import HostNavbar from '../components/HostNavbar';
 import BookingNotification from '../components/BookingNotification';
-import { config } from '../config/env';
+import { config, getImageURL } from '../config/env';
 
 const HostDashboard = () => {
   const { user } = useAuth();
@@ -240,7 +240,7 @@ const HostDashboard = () => {
                     <div className="aspect-w-16 aspect-h-9 bg-gray-200">
                       {property.images && property.images.length > 0 ? (
                         <img
-                          src={`${config.BACKEND_URL}${property.images[0].url}`}
+                          src={getImageURL(property.images[0].url)}
                           alt={property.title}
                           className="w-full h-40 sm:h-48 object-cover"
                         />
