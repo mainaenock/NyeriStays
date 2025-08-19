@@ -2,7 +2,7 @@ const express = require('express');
 const Property = require('../models/Property');
 const Booking = require('../models/Booking');
 const { protect, optionalAuth, authorize, checkOwnership } = require('../middleware/auth');
-const { uploadPropertyImages } = require('../middleware/upload');
+const { uploadPropertyImages, cloudinary } = require('../middleware/upload');
 
 const router = express.Router();
 
@@ -392,11 +392,12 @@ const uploadImages = async (req, res) => {
       return res.status(403).json({ message: 'Not authorized to upload images for this property' });
     }
 
-    // Add uploaded images to property
+    // Add uploaded images to property with Cloudinary data
     const newImages = req.uploadedFiles.map((file, index) => ({
-      url: file.url,
+      url: file.url, // Cloudinary URL
+      publicId: file.publicId, // Cloudinary public ID for deletion
       caption: `Property image ${index + 1}`,
-      isPrimary: index === 0 // First image is primary
+      isPrimary: property.images.length === 0 && index === 0 // First image is primary if no existing images
     }));
 
     // Update property with new images
@@ -440,8 +441,28 @@ const deleteImage = async (req, res) => {
       return res.status(404).json({ message: 'Image not found' });
     }
 
+    // Get the image to delete
+    const deletedImage = property.images[imageIndex];
+    
+    // Delete from Cloudinary if it has a public ID
+    if (deletedImage.publicId) {
+      try {
+        await cloudinary.uploader.destroy(deletedImage.publicId);
+        console.log(`Deleted image from Cloudinary: ${deletedImage.publicId}`);
+      } catch (cloudinaryError) {
+        console.error('Cloudinary deletion error:', cloudinaryError);
+        // Continue with database deletion even if Cloudinary fails
+      }
+    }
+
     // Remove image from array
-    const deletedImage = property.images.splice(imageIndex, 1)[0];
+    property.images.splice(imageIndex, 1);
+    
+    // Update primary image if needed
+    if (deletedImage.isPrimary && property.images.length > 0) {
+      property.images[0].isPrimary = true;
+    }
+    
     await property.save();
 
     res.json({

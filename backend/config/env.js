@@ -21,6 +21,11 @@ const config = {
   EMAIL_FROM: process.env.EMAIL_FROM || 'nyeristays@gmail.com',
   EMAIL_PASSWORD: process.env.EMAIL_PASSWORD || '',
   
+  // Cloudinary Configuration
+  CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME,
+  CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY,
+  CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET,
+  
   // File Upload Configuration
   MAX_FILE_SIZE: parseInt(process.env.MAX_FILE_SIZE) || 5 * 1024 * 1024, // 5MB default
   

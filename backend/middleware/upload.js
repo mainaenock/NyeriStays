@@ -1,14 +1,15 @@
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const { upload: cloudinaryUpload, cloudinary } = require('./cloudinaryStorage');
 
-// Ensure uploads directory exists
+// Ensure uploads directory exists (for fallback/profile uploads)
 const uploadsDir = path.join(__dirname, '../uploads');
 if (!fs.existsSync(uploadsDir)) {
   fs.mkdirSync(uploadsDir, { recursive: true });
 }
 
-// Configure storage
+// Configure storage for local fallback
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     let uploadPath = uploadsDir;
@@ -49,7 +50,7 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
-// Configure multer
+// Configure multer for local storage (fallback)
 const upload = multer({
   storage: storage,
   limits: {
@@ -59,7 +60,7 @@ const upload = multer({
   fileFilter: fileFilter
 });
 
-// Middleware for profile picture upload
+// Middleware for profile picture upload (keep local for now)
 const uploadProfilePicture = (req, res, next) => {
   req.uploadType = 'profile';
   const uploadSingle = upload.single('profilePicture');
@@ -89,10 +90,10 @@ const uploadProfilePicture = (req, res, next) => {
   });
 };
 
-// Middleware for property images upload
+// Middleware for property images upload (now using Cloudinary)
 const uploadPropertyImages = (req, res, next) => {
-  req.uploadType = 'property';
-  const uploadMultiple = upload.array('images', 10); // Maximum 10 images
+  // Use Cloudinary upload middleware
+  const uploadMultiple = cloudinaryUpload.array('images', 10); // Maximum 10 images
   
   uploadMultiple(req, res, (err) => {
     if (err instanceof multer.MulterError) {
@@ -111,11 +112,12 @@ const uploadPropertyImages = (req, res, next) => {
       return res.status(400).json({ message: 'Please select at least one image to upload.' });
     }
     
-    // Add files info to request
+    // Add files info to request with Cloudinary data
     req.uploadedFiles = req.files.map(file => ({
       filename: file.filename,
       path: file.path,
-      url: `/uploads/properties/${file.filename}`
+      url: file.path, // Cloudinary URL
+      publicId: file.filename // Cloudinary public ID for deletion
     }));
     
     next();
@@ -140,5 +142,6 @@ module.exports = {
   upload,
   uploadProfilePicture,
   uploadPropertyImages,
-  deleteFile
+  deleteFile,
+  cloudinary // Export cloudinary for use in routes
 }; 

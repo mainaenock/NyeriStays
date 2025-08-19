@@ -122,6 +122,10 @@ const propertySchema = new mongoose.Schema({
         type: String,
         required: true
       },
+      publicId: {  // Add this field for Cloudinary
+        type: String,
+        required: false
+      },
       caption: String,
       isPrimary: {
         type: Boolean,
