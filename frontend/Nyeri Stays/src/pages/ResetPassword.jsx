@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
-import { Eye, EyeOff, Lock, ArrowLeft, CheckCircle, Shield, ArrowRight, Sparkles } from 'lucide-react'
+import { ArrowLeft, Lock, Eye, EyeOff, Shield, Award, Clock, Play, CheckCircle, HelpCircle, Globe } from 'lucide-react'
+import logo from '../assets/logo.jpg'
 import { authAPI } from '../services/api'
 
 const ResetPassword = () => {
@@ -174,7 +175,7 @@ const ResetPassword = () => {
           <div className="text-center mb-8">
             <div className="flex justify-center mb-6">
               <img 
-                src="/logo.jpg" 
+                src={logo} 
                 alt="Nyeri Stays Logo" 
                 className="w-16 h-16 rounded-2xl object-cover shadow-lg"
               />

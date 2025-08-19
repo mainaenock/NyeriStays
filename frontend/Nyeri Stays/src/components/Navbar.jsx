@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { Search, Menu, User, Globe, Heart, LogOut, Settings, Home, MapPin, Calendar, Users } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
+import logo from '../assets/logo.jpg'
 
 const Navbar = () => {
   const { user, logout, isAuthenticated } = useAuth()
@@ -80,7 +81,7 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <img 
-              src="/logo.jpg" 
+              src={logo} 
               alt="Nyeri Stays Logo" 
               className="w-8 h-8 rounded-lg object-cover"
             />

@@ -1,5 +1,6 @@
-import { Facebook, Twitter, Instagram, Mail, Phone, MapPin } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { Facebook, Twitter, Instagram, Mail, Phone, MapPin, Heart, Shield, Award, Clock, Play, CheckCircle, HelpCircle, Globe } from 'lucide-react'
+import logo from '../assets/logo.jpg'
 
 const Footer = () => {
   return (
@@ -10,7 +11,7 @@ const Footer = () => {
           <div>
             <div className="flex items-center space-x-2 mb-4">
               <img 
-                src="/logo.jpg" 
+                src={logo} 
                 alt="Nyeri Stays Logo" 
                 className="w-8 h-8 rounded-lg object-cover"
               />
