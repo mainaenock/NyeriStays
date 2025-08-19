@@ -83,7 +83,7 @@ const PropertyDetail = () => {
           // Handle both string URLs and object URLs
           const imageUrl = typeof img === 'string' ? img : img.url;
           // Ensure proper URL construction
-          return imageUrl.startsWith('http') ? imageUrl : `${config.backendUrl}${imageUrl}`;
+          return imageUrl.startsWith('http') ? imageUrl : `${config.BACKEND_URL}${imageUrl}`;
         })
       : [],
     amenities: property.amenities || [],

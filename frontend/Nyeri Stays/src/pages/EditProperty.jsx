@@ -551,7 +551,7 @@ const EditProperty = () => {
                       {formData.images.map((image, index) => (
                         <div key={index} className="relative group">
                           <img
-                            src={image.url ? `${config.backendUrl}${image.url}` : URL.createObjectURL(image)}
+                            src={image.url ? `${config.BACKEND_URL}${image.url}` : URL.createObjectURL(image)}
                             alt={`Property image ${index + 1}`}
                             className="w-full h-32 object-cover rounded-lg"
                           />

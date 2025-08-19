@@ -21,13 +21,13 @@ VITE_FRONTEND_URL=http://localhost:5173
 ```env
 # Backend API Configuration
 VITE_API_BASE_URL=https://nyeristays.onrender.com/api
-VITE_BACKEND_PORT=443
-
-# Backend Base URL (for images and resources)
 VITE_BACKEND_URL=https://nyeristays.onrender.com
 
 # Frontend Configuration
 VITE_FRONTEND_URL=https://nyeri-stays001.vercel.app
+
+# Note: VITE_BACKEND_PORT is optional for production (HTTPS uses port 443 by default)
+# VITE_BACKEND_PORT=443
 ```
 
 ## Default Values
@@ -55,9 +55,9 @@ For Vercel deployment, you need to:
    - Navigate to "Environment Variables"
    - Add:
      - `VITE_API_BASE_URL` = `https://nyeristays.onrender.com/api`
-     - `VITE_BACKEND_PORT` = `443`
      - `VITE_BACKEND_URL` = `https://nyeristays.onrender.com`
      - `VITE_FRONTEND_URL` = `https://nyeri-stays001.vercel.app`
+     - `VITE_BACKEND_PORT` = `443` (optional - HTTPS uses this by default)
 
 ## Testing the Connection
 
@@ -82,7 +82,7 @@ For production deployment, update the environment variables to point to your pro
 
 ```env
 VITE_API_BASE_URL=https://nyeristays.onrender.com/api
-VITE_BACKEND_PORT=443
 VITE_BACKEND_URL=https://nyeristays.onrender.com
 VITE_FRONTEND_URL=https://nyeri-stays001.vercel.app
+# VITE_BACKEND_PORT=443 (optional for HTTPS)
 ``` 

@@ -16,6 +16,18 @@ export const config = {
   IS_PRODUCTION: import.meta.env.MODE === 'production',
 };
 
+// Debug logging in production
+if (import.meta.env.MODE === 'production') {
+  console.log('Environment Variables Debug:', {
+    VITE_API_BASE_URL: import.meta.env.VITE_API_BASE_URL,
+    VITE_BACKEND_URL: import.meta.env.VITE_BACKEND_URL,
+    VITE_FRONTEND_URL: import.meta.env.VITE_FRONTEND_URL,
+    'config.API_BASE_URL': config.API_BASE_URL,
+    'config.BACKEND_URL': config.BACKEND_URL,
+    'config.FRONTEND_URL': config.FRONTEND_URL,
+  });
+}
+
 // Helper function to get full backend URL
 export const getBackendURL = (endpoint = '') => {
   return `${config.API_BASE_URL}${endpoint}`;

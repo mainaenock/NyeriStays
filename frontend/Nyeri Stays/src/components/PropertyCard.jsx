@@ -12,7 +12,7 @@ const PropertyCard = ({ property }) => {
     if (!imageUrl) return 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80';
     if (imageUrl.startsWith('http')) return imageUrl; // Already a full URL
     if (imageUrl.startsWith('/uploads')) {
-      return `${config.backendUrl}${imageUrl}`; // Convert relative path to full URL
+      return `${config.BACKEND_URL}${imageUrl}`; // Convert relative path to full URL
     }
     return imageUrl;
   }

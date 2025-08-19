@@ -240,7 +240,7 @@ const HostDashboard = () => {
                     <div className="aspect-w-16 aspect-h-9 bg-gray-200">
                       {property.images && property.images.length > 0 ? (
                         <img
-                          src={`${config.backendUrl}${property.images[0].url}`}
+                          src={`${config.BACKEND_URL}${property.images[0].url}`}
                           alt={property.title}
                           className="w-full h-40 sm:h-48 object-cover"
                         />
