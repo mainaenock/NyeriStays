@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Heart, MapPin, Wifi, Coffee, Car, Mountain, Star, Users } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import StarRating from './StarRating'
@@ -6,39 +6,6 @@ import { getImageURL } from '../config/env'
 
 const PropertyCard = ({ property }) => {
   const [isLiked, setIsLiked] = useState(false)
-
-  // Debug logging to see property structure
-  useEffect(() => {
-    console.log('PropertyCard received property:', {
-      id: property._id || property.id,
-      title: property.title,
-      images: property.images,
-      image: property.image,
-      'images[0]?.url': property.images?.[0]?.url
-    });
-  }, [property]);
-
-  // Helper function to get the best available image
-  const getBestImage = () => {
-    // Try to get image from images array first
-    if (property.images && property.images.length > 0) {
-      const firstImage = property.images[0];
-      if (typeof firstImage === 'string') {
-        return getImageURL(firstImage);
-      }
-      if (firstImage && firstImage.url) {
-        return getImageURL(firstImage.url);
-      }
-    }
-    
-    // Fallback to property.image
-    if (property.image) {
-      return getImageURL(property.image);
-    }
-    
-    // Default placeholder
-    return 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80';
-  };
 
   const getAmenityIcon = (amenity) => {
     switch (amenity.toLowerCase()) {
@@ -62,13 +29,10 @@ const PropertyCard = ({ property }) => {
         {/* Image Container */}
         <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
           <img
-            src={getBestImage()}
+            src={getImageURL(property.images?.[0]?.url || property.image)}
             alt={property.title || 'Property'}
             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
             onError={(e) => {
-              console.log('Image failed to load for property:', property.title);
-              console.log('Attempted image URL:', e.target.src);
-              console.log('Property images data:', property.images);
               e.target.src = 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80';
             }}
           />
