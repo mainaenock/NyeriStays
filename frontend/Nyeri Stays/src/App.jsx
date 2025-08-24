@@ -98,6 +98,9 @@ function App() {
                           </ProtectedRoute>
                         } 
                       />
+                      
+                      {/* Catch-all route for SPA routing */}
+                      <Route path="*" element={<Home />} />
                     </Routes>
           </main>
           <Footer />

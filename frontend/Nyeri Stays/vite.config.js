@@ -13,5 +13,13 @@ export default defineConfig({
   preview: {
     port: 3000,
     host: true
-  }
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: undefined
+      }
+    }
+  },
+  publicDir: 'public'
 })
