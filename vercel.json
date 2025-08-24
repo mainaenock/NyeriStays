@@ -1,0 +1,30 @@
+{
+  "buildCommand": "cd frontend/Nyeri\\ Stays && npm run build",
+  "outputDirectory": "frontend/Nyeri Stays/dist",
+  "rewrites": [
+    {
+      "source": "/properties",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/property/:id",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/profile",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/host/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/admin/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
