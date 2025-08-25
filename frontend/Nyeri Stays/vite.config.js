@@ -10,7 +10,6 @@ export default defineConfig({
     tailwindcss(),
     copy({
       patterns: [
-        { from: 'vercel.json', to: 'dist' },
         { from: 'public/_redirects', to: 'dist' }
       ]
     })
