@@ -3,4 +3,14 @@
 /profile      /index.html   200
 /host/*       /index.html   200
 /admin/*      /index.html   200
+/signup       /index.html   200
+/login        /index.html   200
+/forgot-password /index.html 200
+/reset-password/* /index.html 200
+/become-host  /index.html   200
+/legal        /index.html   200
+/about        /index.html   200
+/contact      /index.html   200
+/help-center  /index.html   200
+/privacy-policy /index.html 200
 /*            /index.html   200
