@@ -16,6 +16,34 @@ export const AuthProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // Helper function to safely extract user data
+  const extractUserData = (response) => {
+    console.log('🔍 extractUserData input:', response)
+    
+    // If response is already user data
+    if (response && typeof response === 'object' && response._id) {
+      return response
+    }
+    
+    // If response has a user property
+    if (response && response.user && typeof response.user === 'object' && response.user._id) {
+      return response.user
+    }
+    
+    // If response has a data property
+    if (response && response.data && typeof response.data === 'object' && response.data._id) {
+      return response.data
+    }
+    
+    // If response is an array with user data
+    if (Array.isArray(response) && response.length > 0 && response[0]._id) {
+      return response[0]
+    }
+    
+    console.error('❌ Could not extract user data from:', response)
+    return null
+  }
+
   // Check authentication on app load
   useEffect(() => {
     const checkAuth = async () => {
@@ -30,12 +58,15 @@ export const AuthProvider = ({ children }) => {
           if (tokenValid) {
             // Verify token by getting current user
             const response = await authAPI.getCurrentUser()
-            const userData = response.user || response
+            console.log('🔍 getCurrentUser response:', response)
             
-            if (userData && userData._id) {
+            const userData = extractUserData(response)
+            
+            if (userData) {
               setUser(userData)
+              console.log('✅ User set successfully:', userData)
             } else {
-              console.error('Invalid user data received:', userData)
+              console.error('❌ Invalid user data received:', response)
               localStorage.removeItem('token')
               setUser(null)
             }
@@ -67,7 +98,17 @@ export const AuthProvider = ({ children }) => {
     try {
       setError(null);
       const response = await authAPI.login(credentials);
-      setUser(response.user || response);
+      console.log('🔍 Login response:', response)
+      
+      const userData = extractUserData(response)
+      
+      if (userData) {
+        setUser(userData)
+        console.log('✅ Login user set successfully:', userData)
+      } else {
+        console.error('❌ Login: Invalid user data received:', response)
+      }
+      
       return response;
     } catch (error) {
       setError(error.message);
