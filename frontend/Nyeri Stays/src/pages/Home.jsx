@@ -41,7 +41,7 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-3 sm:px-4 md:px-6 lg:px-8">
+      <section className="relative py-20 sm:py-24 md:py-28 lg:py-32 overflow-hidden px-3 sm:px-4 md:px-6 lg:px-8">
         {/* Background with overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-green-900 via-green-800 to-green-700">
           <div className="absolute inset-0 bg-black/30"></div>
@@ -52,11 +52,11 @@ const Home = () => {
         </div>
 
         {/* Content */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto pt-16 sm:pt-20 pb-12 sm:pb-16">
+        <div className="relative z-10 w-full max-w-7xl mx-auto">
           <div className="text-center text-white">
             {/* Main heading with gradient text */}
-            <div className="mb-4 sm:mb-6 md:mb-8">
-              <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight mb-3 sm:mb-4">
+            <div className="mb-6 sm:mb-8 md:mb-10">
+              <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight mb-4 sm:mb-6">
                 <span className="bg-gradient-to-r from-white via-green-100 to-green-200 bg-clip-text text-transparent">
                   Discover
                 </span>
@@ -68,10 +68,8 @@ const Home = () => {
               </p>
             </div>
 
-
-
             {/* Stats Section */}
-            <div className="mt-6 sm:mt-8 md:mt-12 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 md:gap-8 max-w-4xl mx-auto px-3">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 md:gap-8 max-w-4xl mx-auto px-3">
               <div className="text-center">
                 <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-1">500+</div>
                 <div className="text-xs sm:text-sm md:text-base text-green-200">Properties</div>
@@ -91,15 +89,6 @@ const Home = () => {
             </div>
           </div>
         </div>
-
-        {/* Scroll indicator */}
-        <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-5 h-8 sm:w-6 sm:h-10 border-2 border-white/50 rounded-full flex justify-center">
-            <div className="w-1 h-2.5 sm:h-3 bg-white/70 rounded-full mt-1.5 sm:mt-2 animate-pulse"></div>
-          </div>
-        </div>
-
-
       </section>
 
       {/* Featured Properties */}
