@@ -42,20 +42,35 @@ const limiter = rateLimit({
 });
 app.use('/api/', limiter);
 
+// Handle preflight requests
+app.options('*', cors());
+
 // CORS configuration
 app.use(cors({
-  origin: config.IS_PRODUCTION 
-    ? [
-        'https://nyeri-stays001.vercel.app',
-        'https://nyeri-stays001.vercel.app/',
-        'https://nyeri-stays.onrender.com', // Add your new Render frontend domain
-        'https://nyeri-stays-t8wa.onrender.com', // Add your actual frontend domain
-        config.FRONTEND_URL
-      ] 
-    : ['http://localhost:5173', 'http://localhost:3000'],
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    const allowedOrigins = [
+      'https://nyeri-stays001.vercel.app',
+      'https://nyeri-stays001.vercel.app/',
+      'https://nyeri-stays.onrender.com',
+      'https://nyeri-stays-t8wa.onrender.com',
+      'http://localhost:5173',
+      'http://localhost:3000'
+    ];
+    
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      console.log('CORS blocked origin:', origin);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  optionsSuccessStatus: 200
 }));
 
 // Body parsing middleware
