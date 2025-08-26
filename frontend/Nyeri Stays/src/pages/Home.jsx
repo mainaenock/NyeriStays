@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Users, Star, Heart, Shield, Award, Clock, ArrowRight, Play, CheckCircle, HelpCircle, Globe, MapPin } from 'lucide-react'
+import { Users, Star, Heart, Shield, Award, Clock, ArrowRight, Play, CheckCircle, HelpCircle, Globe, MapPin, Search } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import PropertyCard from '../components/PropertyCard'
 import PropertyCardSkeleton from '../components/PropertyCardSkeleton'
@@ -120,7 +120,7 @@ const Home = () => {
           </div>
 
           {loading ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-10 mb-12 sm:mb-16">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 lg:gap-8 mb-12 sm:mb-16">
               {[...Array(6)].map((_, index) => (
                 <PropertyCardSkeleton key={index} />
               ))}
@@ -139,7 +139,7 @@ const Home = () => {
             </div>
           ) : featuredProperties.length > 0 ? (
             <>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-10 mb-12 sm:mb-16">
+              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 lg:gap-8 mb-12 sm:mb-16">
                 {featuredProperties.map((property) => (
                   <PropertyCard key={property._id || property.id} property={property} />
                 ))}
