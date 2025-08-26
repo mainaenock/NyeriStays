@@ -32,7 +32,6 @@ const config = {
   // Development helpers
   IS_DEVELOPMENT: process.env.NODE_ENV === 'development',
   IS_PRODUCTION: process.env.NODE_ENV === 'production',
-  ALLOW_LOCALHOST: process.env.ALLOW_LOCALHOST === 'true' || process.env.NODE_ENV === 'development',
 };
 
 // Validate required configuration

@@ -43,19 +43,15 @@ const limiter = rateLimit({
 app.use('/api/', limiter);
 
 // CORS configuration
-const corsOrigins = [
-  'https://nyeri-stays001.vercel.app',
-  'https://nyeri-stays001.vercel.app/',
-  config.FRONTEND_URL
-];
-
-// Add localhost origins if allowed
-if (config.ALLOW_LOCALHOST) {
-  corsOrigins.unshift('http://localhost:3000', 'http://localhost:5173');
-}
-
 app.use(cors({
-  origin: corsOrigins.filter(Boolean), // Remove any undefined values
+  origin: config.IS_PRODUCTION 
+    ? [
+        'https://nyeri-stays001.vercel.app',
+        'https://nyeri-stays001.vercel.app/',
+        'https://nyeri-stays.onrender.com', // Add your new Render frontend domain
+        config.FRONTEND_URL
+      ] 
+    : ['http://localhost:5173', 'http://localhost:3000'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization'],

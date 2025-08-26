@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: nyeri-stays-frontend
+    env: static
+    buildCommand: |
+      cd "frontend/Nyeri Stays"
+      npm install
+      npm run build
+    staticPublishPath: frontend/Nyeri Stays/dist
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: https://nyeristays.onrender.com/api
+      - key: VITE_BACKEND_URL
+        value: https://nyeristays.onrender.com
+      - key: VITE_FRONTEND_URL
+        value: https://nyeri-stays.onrender.com
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    # Alternative: Use a web service instead of static site
+    # This gives you more control over file serving
