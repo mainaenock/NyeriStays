@@ -12,12 +12,12 @@ fi
 
 # Check if .env.production exists
 if [ ! -f ".env.production" ]; then
-    echo "⚠️  Creating .env.production file..."
+    echo "⚠️  No .env.production file found in frontend. Creating one with development defaults..."
     cat > .env.production << EOF
 # Production Environment for Render
 VITE_API_BASE_URL=https://nyeristays.onrender.com/api
 VITE_BACKEND_URL=https://nyeristays.onrender.com
-VITE_FRONTEND_URL=https://nyeri-stays-frontend.onrender.com
+VITE_FRONTEND_URL=https://nyeri-stays-t8wa.onrender.com
 EOF
     echo "✅ Created .env.production file"
 fi

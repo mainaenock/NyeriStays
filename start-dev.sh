@@ -35,7 +35,7 @@ if [ ! -f .env ]; then
     cat > .env << EOF
 VITE_API_BASE_URL=http://localhost:4000/api
 VITE_BACKEND_URL=http://localhost:4000
-VITE_FRONTEND_URL=http://localhost:5173
+VITE_FRONTEND_URL=https://nyeri-stays-t8wa.onrender.com
 EOF
     echo "✅ Created .env file with development defaults"
 fi

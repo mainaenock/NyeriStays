@@ -21,7 +21,7 @@ export const config = {
   // Frontend Configuration
   FRONTEND_URL: import.meta.env.VITE_FRONTEND_URL || 
     (import.meta.env.MODE === 'production' 
-      ? 'https://nyeri-stays-frontend.onrender.com' 
+      ? 'https://nyeri-stays-t8wa.onrender.com' 
       : 'http://localhost:3000'),
   
   // Environment

@@ -13,4 +13,4 @@ services:
       - key: VITE_BACKEND_URL
         value: https://nyeristays.onrender.com
       - key: VITE_FRONTEND_URL
-        value: https://nyeri-stays.onrender.com
+        value: https://nyeri-stays-t8wa.onrender.com

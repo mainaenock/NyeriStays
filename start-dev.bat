@@ -34,7 +34,7 @@ if not exist .env (
     (
         echo VITE_API_BASE_URL=http://localhost:4000/api
         echo VITE_BACKEND_URL=http://localhost:4000
-        echo VITE_FRONTEND_URL=http://localhost:5173
+        echo VITE_FRONTEND_URL=https://nyeri-stays-t8wa.onrender.com
     ) > .env
     echo ✅ Created .env file with development defaults
 )
