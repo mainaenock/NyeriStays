@@ -146,8 +146,8 @@ export const authAPI = {
         return false
       }
       
-      // Set token in axios headers
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+      // Set token in api instance headers (not axios directly)
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`
       return true
     } catch (error) {
       console.error('Error restoring token:', error)

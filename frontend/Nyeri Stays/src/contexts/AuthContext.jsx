@@ -14,29 +14,43 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   // Check authentication on app load
   useEffect(() => {
     const checkAuth = async () => {
-      const token = localStorage.getItem('token')
-      
-      if (token) {
-        try {
+      try {
+        setLoading(true);
+        const token = localStorage.getItem('token')
+        
+        if (token) {
           // Restore token in axios
-          authAPI.restoreToken(token)
+          const tokenValid = authAPI.restoreToken(token)
           
-          // Verify token by getting current user
-          const response = await authAPI.getCurrentUser()
-          const userData = response.user || response
-          
-          setUser(userData)
-        } catch (error) {
-          console.error('Token validation failed:', error)
-          localStorage.removeItem('token')
+          if (tokenValid) {
+            // Verify token by getting current user
+            const response = await authAPI.getCurrentUser()
+            const userData = response.user || response
+            
+            if (userData && userData._id) {
+              setUser(userData)
+            } else {
+              console.error('Invalid user data received:', userData)
+              localStorage.removeItem('token')
+              setUser(null)
+            }
+          } else {
+            setUser(null)
+          }
+        } else {
           setUser(null)
         }
-      } else {
+      } catch (error) {
+        console.error('Token validation failed:', error)
+        localStorage.removeItem('token')
         setUser(null)
+      } finally {
+        setLoading(false)
       }
     }
 
@@ -94,6 +108,7 @@ export const AuthProvider = ({ children }) => {
   const value = {
     user,
     error,
+    loading,
     login,
     register,
     logout,
