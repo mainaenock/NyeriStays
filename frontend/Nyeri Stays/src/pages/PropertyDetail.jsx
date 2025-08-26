@@ -216,7 +216,7 @@ const PropertyDetail = () => {
     
     // Check if user has a completed booking for this property
     const completedBooking = userBookings.find(booking => 
-      booking.property._id === id && 
+      booking && booking.property && booking.property._id === id && 
       booking.status === 'completed' &&
       !booking.review?.rating // No existing review
     )
@@ -231,7 +231,7 @@ const PropertyDetail = () => {
       
       // Find the completed booking for this property
       const completedBooking = userBookings.find(booking => 
-        booking.property._id === id && booking.status === 'completed'
+        booking && booking.property && booking.property._id === id && booking.status === 'completed'
       )
       
       if (!completedBooking) {
@@ -449,7 +449,7 @@ const PropertyDetail = () => {
                 {/* Show message if user can't review */}
                 {authAPI.isAuthenticated() && !canUserReview() && userBookings.length > 0 && (
                   <div className="text-sm text-gray-500">
-                    {userBookings.find(b => b.property._id === id)?.status === 'completed' 
+                    {userBookings.find(b => b && b.property && b.property._id === id)?.status === 'completed' 
                       ? 'You have already reviewed this property'
                       : 'You can review after completing your stay'
                     }
