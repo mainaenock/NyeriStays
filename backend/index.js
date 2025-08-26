@@ -18,6 +18,9 @@ dotenv.config();
 
 const app = express();
 
+// Trust proxy for Render deployment
+app.set('trust proxy', 1);
+
 // Security middleware
 app.use(helmet({
   contentSecurityPolicy: {
@@ -39,34 +42,19 @@ const limiter = rateLimit({
   message: 'Too many requests from this IP, please try again later.',
   standardHeaders: true,
   legacyHeaders: false,
+  keyGenerator: (req) => {
+    // Use X-Forwarded-For header if available, otherwise use IP
+    return req.headers['x-forwarded-for'] || req.ip || req.connection.remoteAddress;
+  }
 });
 app.use('/api/', limiter);
 
 // Handle preflight requests
 app.options('*', cors());
 
-// CORS configuration
+// CORS configuration - simplified and robust
 app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-    
-    const allowedOrigins = [
-      'https://nyeri-stays001.vercel.app',
-      'https://nyeri-stays001.vercel.app/',
-      'https://nyeri-stays.onrender.com',
-      'https://nyeri-stays-t8wa.onrender.com',
-      'http://localhost:5173',
-      'http://localhost:3000'
-    ];
-    
-    if (allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      console.log('CORS blocked origin:', origin);
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: true, // Allow all origins temporarily for debugging
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
