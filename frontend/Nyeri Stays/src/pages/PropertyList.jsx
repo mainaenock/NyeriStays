@@ -148,7 +148,7 @@ const PropertyList = () => {
 
         {/* Loading Grid */}
         <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-12 sm:py-16 md:py-20">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
+          <div className="grid grid-cols-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6 lg:gap-8">
             {[...Array(8)].map((_, index) => (
               <PropertyCardSkeleton key={index} />
             ))}
@@ -524,7 +524,7 @@ const PropertyList = () => {
 
           {/* Properties Grid */}
           <div className="flex-1">
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8">
+            <div className="grid grid-cols-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6 lg:gap-8">
               {transformedProperties.map((property) => (
                 <PropertyCard key={property.id} property={property} />
               ))}
