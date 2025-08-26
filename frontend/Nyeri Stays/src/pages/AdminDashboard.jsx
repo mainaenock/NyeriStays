@@ -132,18 +132,22 @@ const AdminDashboard = () => {
 
   // Filter functions
   const filteredUsers = users.filter(user => 
-    user.firstName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    user.lastName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    user.email?.toLowerCase().includes(searchTerm.toLowerCase())
+    user && user._id && (
+      user.firstName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.lastName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.email?.toLowerCase().includes(searchTerm.toLowerCase())
+    )
   );
 
   const filteredProperties = properties.filter(property => {
-  const matchesSearch = property.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-             property.location?.city?.toLowerCase().includes(searchTerm.toLowerCase());
-  return matchesSearch;
+    if (!property || !property._id) return false;
+    const matchesSearch = property.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+               property.location?.city?.toLowerCase().includes(searchTerm.toLowerCase());
+    return matchesSearch;
   });
 
   const filteredBookings = bookings.filter(booking => {
+    if (!booking || !booking._id) return false;
     const matchesSearch = booking.bookingCode?.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          booking.guest?.firstName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          booking.guest?.lastName?.toLowerCase().includes(searchTerm.toLowerCase());
@@ -656,22 +660,24 @@ const AdminDashboard = () => {
                 </div>
                 <div className="p-6">
                   {users.slice(0, 5).map((user) => (
-                    <div key={user._id} className="flex items-center justify-between py-3 border-b border-green-100 last:border-b-0 hover:bg-green-50 transition-colors rounded-lg px-2">
-                      <div className="flex items-center">
-                        <div className="w-10 h-10 bg-gradient-to-br from-green-100 to-green-200 rounded-full flex items-center justify-center">
-                          <span className="text-sm font-semibold text-green-700">
-                            {user.firstName?.[0]}{user.lastName?.[0]}
-                          </span>
+                    user && user._id && (
+                      <div key={user._id} className="flex items-center justify-between py-3 border-b border-green-100 last:border-b-0 hover:bg-green-50 transition-colors rounded-lg px-2">
+                        <div className="flex items-center">
+                          <div className="w-10 h-10 bg-gradient-to-br from-green-100 to-green-200 rounded-full flex items-center justify-center">
+                            <span className="text-sm font-semibold text-green-700">
+                              {user.firstName?.[0]}{user.lastName?.[0]}
+                            </span>
+                          </div>
+                          <div className="ml-3">
+                            <p className="text-sm font-medium text-gray-900">
+                              {user.firstName} {user.lastName}
+                            </p>
+                            <p className="text-sm text-gray-500">{user.email}</p>
+                          </div>
                         </div>
-                        <div className="ml-3">
-                          <p className="text-sm font-medium text-gray-900">
-                            {user.firstName} {user.lastName}
-                          </p>
-                          <p className="text-sm text-gray-500">{user.email}</p>
-                        </div>
+                        <StatusBadge status={user.role} />
                       </div>
-                      <StatusBadge status={user.role} />
-                    </div>
+                    )
                   ))}
                 </div>
               </div>
@@ -758,51 +764,53 @@ const AdminDashboard = () => {
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
                     {filteredUsers.map((user) => (
-                      <tr key={user._id}>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="flex items-center">
-                            <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
-                              <span className="text-sm font-medium text-gray-600">
-                                {user.firstName?.[0]}{user.lastName?.[0]}
-                              </span>
-                            </div>
-                            <div className="ml-4">
-                              <div className="text-sm font-medium text-gray-900">
-                                {user.firstName} {user.lastName}
+                      user && user._id && (
+                        <tr key={user._id}>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <div className="flex items-center">
+                              <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
+                                <span className="text-sm font-medium text-gray-600">
+                                  {user.firstName?.[0]}{user.lastName?.[0]}
+                                </span>
+                              </div>
+                              <div className="ml-4">
+                                <div className="text-sm font-medium text-gray-900">
+                                  {user.firstName} {user.lastName}
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{user.email}</td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <StatusBadge status={user.role} />
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <StatusBadge status={user.isVerified ? 'verified' : 'pending'} />
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                          <div className="flex space-x-2">
-                            <button 
-                              onClick={() => handleViewUser(user)}
-                              className="text-green-600 hover:text-green-900"
-                            >
-                              <Eye size={16} />
-                            </button>
-                            <button 
-                              onClick={() => handleEditUser(user)}
-                              className="text-blue-600 hover:text-blue-900"
-                            >
-                              <Edit size={16} />
-                            </button>
-                            <button 
-                              onClick={() => handleDeleteUser(user._id)}
-                              className="text-red-600 hover:text-red-900"
-                            >
-                              <Trash2 size={16} />
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{user.email}</td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <StatusBadge status={user.role} />
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <StatusBadge status={user.isVerified ? 'verified' : 'pending'} />
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <div className="flex space-x-2">
+                              <button 
+                                onClick={() => handleViewUser(user)}
+                                className="text-green-600 hover:text-green-900"
+                              >
+                                <Eye size={16} />
+                              </button>
+                              <button 
+                                onClick={() => handleEditUser(user)}
+                                className="text-blue-600 hover:text-blue-900"
+                              >
+                                <Edit size={16} />
+                              </button>
+                              <button 
+                                onClick={() => handleDeleteUser(user._id)}
+                                className="text-red-600 hover:text-red-900"
+                              >
+                                <Trash2 size={16} />
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      )
                     ))}
                   </tbody>
                 </table>

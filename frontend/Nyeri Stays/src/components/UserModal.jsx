@@ -43,7 +43,7 @@ const UserModal = ({ user, isOpen, onClose, mode = 'view', onSave }) => {
     setError('');
 
     try {
-      if (mode === 'edit') {
+      if (mode === 'edit' && user && user._id) {
         await usersAPI.update(user._id, formData);
         onSave && onSave();
       }
@@ -57,9 +57,11 @@ const UserModal = ({ user, isOpen, onClose, mode = 'view', onSave }) => {
 
   const handleToggleStatus = async () => {
     try {
-      await usersAPI.toggleStatus(user._id);
-      onSave && onSave();
-      onClose();
+      if (user && user._id) {
+        await usersAPI.toggleStatus(user._id);
+        onSave && onSave();
+        onClose();
+      }
     } catch (error) {
       setError(error.message || 'An error occurred');
     }
