@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react'
-import { Search, MapPin, Calendar, Users, Star, Heart, Shield, Award, Clock, ArrowRight, Play, CheckCircle, HelpCircle, Globe } from 'lucide-react'
+import { Users, Star, Heart, Shield, Award, Clock, ArrowRight, Play, CheckCircle, HelpCircle, Globe } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import PropertyCard from '../components/PropertyCard'
 import PropertyCardSkeleton from '../components/PropertyCardSkeleton'
 import { propertiesAPI } from '../services/api'
 
 const Home = () => {
-  const [searchQuery, setSearchQuery] = useState('')
   const [featuredProperties, setFeaturedProperties] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -69,40 +68,7 @@ const Home = () => {
               </p>
             </div>
 
-            {/* Enhanced Search Section */}
-            <div className="search-section bg-white/95 backdrop-blur-sm rounded-xl sm:rounded-2xl md:rounded-3xl p-3 sm:p-4 md:p-6 lg:p-8 shadow-2xl max-w-5xl mx-auto border border-white/20 mx-3 sm:mx-auto">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
-                <div className="relative group">
-                  <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-green-600 group-focus-within:text-green-700 transition-colors w-4 h-4 sm:w-5 sm:h-5" />
-                  <input
-                    type="text"
-                    placeholder="Where to?"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-2.5 sm:py-3 md:py-4 text-sm sm:text-base md:text-lg border-2 border-gray-200 rounded-lg sm:rounded-xl focus:outline-none focus:ring-4 focus:ring-green-500/20 focus:border-green-600 transition-all duration-200 bg-white/80 hover:bg-white"
-                  />
-                </div>
-                <div className="relative group">
-                  <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-green-600 group-focus-within:text-green-700 transition-colors w-4 h-4 sm:w-5 sm:h-5" />
-                  <input
-                    type="date"
-                    className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-2.5 sm:py-3 md:py-4 text-sm sm:text-base md:text-lg border-2 border-gray-200 rounded-lg sm:rounded-xl focus:outline-none focus:ring-4 focus:ring-green-500/20 focus:border-green-600 transition-all duration-200 bg-white/80 hover:bg-white"
-                  />
-                </div>
-                <div className="relative group">
-                  <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-green-600 group-focus-within:text-green-700 transition-colors w-4 h-4 sm:w-5 sm:h-5" />
-                  <input
-                    type="date"
-                    className="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-2.5 sm:py-3 md:py-4 text-sm sm:text-base md:text-lg border-2 border-gray-200 rounded-lg sm:rounded-xl focus:outline-none focus:ring-4 focus:ring-green-500/20 focus:border-green-600 transition-all duration-200 bg-white/80 hover:bg-white"
-                  />
-                </div>
-                <button className="bg-gradient-to-r from-green-700 to-green-800 hover:from-green-600 hover:to-green-700 text-white py-2.5 sm:py-3 md:py-4 px-4 sm:px-6 md:px-8 rounded-lg sm:rounded-xl font-semibold text-sm sm:text-base md:text-lg transition-all duration-200 transform hover:scale-105 hover:shadow-xl flex items-center justify-center gap-2 shadow-lg">
-                  <Search size={18} className="sm:w-5 sm:h-5" />
-                  <span className="hidden xs:inline">Search</span>
-                  <span className="xs:hidden">Go</span>
-                </button>
-              </div>
-            </div>
+
 
             {/* Stats Section */}
             <div className="mt-6 sm:mt-8 md:mt-12 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 md:gap-8 max-w-4xl mx-auto px-3">
