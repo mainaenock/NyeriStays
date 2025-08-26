@@ -19,6 +19,13 @@ const Home = () => {
       try {
         setLoading(true)
         const response = await propertiesAPI.getFeatured(6)
+        console.log('Featured properties API response:', response);
+        console.log('Featured properties data:', response.data);
+        
+        if (response.data && response.data.length > 0) {
+          console.log('First featured property images:', response.data[0].images);
+        }
+        
         setFeaturedProperties(response.data || [])
       } catch (error) {
         // Error fetching featured properties

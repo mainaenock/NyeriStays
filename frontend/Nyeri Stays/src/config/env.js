@@ -1,18 +1,28 @@
 // Environment configuration
 export const config = { 
-  // API Configuration
-  API_BASE_URL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000/api',
+  // API Configuration - automatically detect environment
+  API_BASE_URL: import.meta.env.VITE_API_BASE_URL || 
+    (import.meta.env.MODE === 'production' 
+      ? 'https://nyeristays.onrender.com/api' 
+      : 'http://localhost:4000/api'),
+  
   BACKEND_PORT: import.meta.env.VITE_BACKEND_PORT || '4000',
   
   // Backend Base URL (for images and other resources)
-  BACKEND_URL: import.meta.env.VITE_BACKEND_URL || 'http://localhost:4000',
+  BACKEND_URL: import.meta.env.VITE_BACKEND_URL || 
+    (import.meta.env.MODE === 'production' 
+      ? 'https://nyeristays.onrender.com' 
+      : 'http://localhost:4000'),
   
   // Cloudinary Configuration (optional - for direct frontend uploads)
   CLOUDINARY_CLOUD_NAME: import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || '',
   CLOUDINARY_UPLOAD_PRESET: import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET || '',
   
   // Frontend Configuration
-  FRONTEND_URL: import.meta.env.VITE_FRONTEND_URL || 'http://localhost:5173',
+  FRONTEND_URL: import.meta.env.VITE_FRONTEND_URL || 
+    (import.meta.env.MODE === 'production' 
+      ? 'https://nyeri-stays-frontend.onrender.com' 
+      : 'http://localhost:3000'),
   
   // Environment
   NODE_ENV: import.meta.env.MODE || 'development',
@@ -20,15 +30,25 @@ export const config = {
   IS_PRODUCTION: import.meta.env.MODE === 'production',
 };
 
-// Debug logging in production
-if (import.meta.env.MODE === 'production') {
-  console.log('Environment Variables Debug:', {
+// Debug logging in development
+if (import.meta.env.MODE === 'development') {
+  console.log('🔧 Development Environment Configuration:', {
     VITE_API_BASE_URL: import.meta.env.VITE_API_BASE_URL,
     VITE_BACKEND_URL: import.meta.env.VITE_BACKEND_URL,
     VITE_FRONTEND_URL: import.meta.env.VITE_FRONTEND_URL,
     'config.API_BASE_URL': config.API_BASE_URL,
     'config.BACKEND_URL': config.BACKEND_URL,
     'config.FRONTEND_URL': config.FRONTEND_URL,
+    'MODE': import.meta.env.MODE,
+  });
+}
+
+// Production logging (minimal)
+if (import.meta.env.MODE === 'production') {
+  console.log('🚀 Production Environment:', {
+    'API_BASE_URL': config.API_BASE_URL,
+    'BACKEND_URL': config.BACKEND_URL,
+    'FRONTEND_URL': config.FRONTEND_URL,
   });
 }
 

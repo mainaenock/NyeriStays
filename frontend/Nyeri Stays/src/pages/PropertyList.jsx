@@ -58,9 +58,8 @@ const PropertyList = () => {
     price: property.pricing.pricePerNight,
     rating: property.ratings.average || 0,
     reviews: property.ratings.totalReviews || 0,
-    image: property.images && property.images.length > 0 
-      ? getImageURL(property.images[0].url)
-      : '/placeholder-property.jpg',
+    // Keep the original images array structure for PropertyCard
+    images: property.images || [],
     amenities: property.amenities || [],
     description: property.description,
     type: property.type,
@@ -74,6 +73,13 @@ const PropertyList = () => {
       setError(null)
       
       const response = await propertiesAPI.getAll(filters)
+      console.log('Properties API response:', response);
+      console.log('Properties data:', response.data);
+      
+      if (response.data && response.data.length > 0) {
+        console.log('First property images:', response.data[0].images);
+      }
+      
       setProperties(response.data || [])
     } catch (error) {
       console.error('Error fetching properties:', error)
