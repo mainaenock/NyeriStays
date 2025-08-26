@@ -23,15 +23,15 @@ export const AuthProvider = ({ children }) => {
     console.log('🔍 response keys:', Object.keys(response))
     
     // Direct extraction for known response structure
-    if (response && response.user && response.user._id) {
+    if (response && response.user && (response.user._id || response.user.id)) {
       console.log('✅ Direct extraction: Found user data in response.user')
-      return response.user
+      return normalizeUserData(response.user)
     }
     
     // If response is already user data
-    if (response && typeof response === 'object' && response._id) {
+    if (response && typeof response === 'object' && (response._id || response.id)) {
       console.log('✅ Found user data directly in response')
-      return response
+      return normalizeUserData(response)
     }
     
     // If response has a user property
@@ -39,28 +39,47 @@ export const AuthProvider = ({ children }) => {
       console.log('🔍 response.user:', response.user)
       console.log('🔍 response.user keys:', Object.keys(response.user))
       console.log('🔍 response.user._id:', response.user._id)
+      console.log('🔍 response.user.id:', response.user.id)
       
-      if (response.user._id) {
+      if (response.user._id || response.user.id) {
         console.log('✅ Found user data in response.user')
-        return response.user
+        return normalizeUserData(response.user)
       }
     }
     
     // If response has a data property
-    if (response && response.data && typeof response.data === 'object' && response.data._id) {
+    if (response && response.data && typeof response.data === 'object' && (response.data._id || response.data.id)) {
       console.log('✅ Found user data in response.data')
-      return response.data
+      return normalizeUserData(response.data)
     }
     
     // If response is an array with user data
-    if (Array.isArray(response) && response.length > 0 && response[0]._id) {
+    if (Array.isArray(response) && response.length > 0 && (response[0]._id || response[0].id)) {
       console.log('✅ Found user data in response array')
-      return response[0]
+      return normalizeUserData(response[0])
     }
     
     console.error('❌ Could not extract user data from:', response)
     console.error('❌ Response structure:', JSON.stringify(response, null, 2))
     return null
+  }
+
+  // Helper function to normalize user data (ensure _id exists)
+  const normalizeUserData = (userData) => {
+    if (!userData) return null
+    
+    // If user has 'id' but no '_id', create '_id' from 'id'
+    if (userData.id && !userData._id) {
+      userData._id = userData.id
+    }
+    
+    // If user has '_id' but no 'id', create 'id' from '_id'
+    if (userData._id && !userData.id) {
+      userData.id = userData._id
+    }
+    
+    console.log('✅ Normalized user data:', userData)
+    return userData
   }
 
   // Check authentication on app load
