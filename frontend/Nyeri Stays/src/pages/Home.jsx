@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Users, Star, Heart, Shield, Award, Clock, ArrowRight, Play, CheckCircle, HelpCircle, Globe, MapPin, Search } from 'lucide-react'
+import { Users, Star, Heart, Shield, Award, Clock, ArrowRight, Play, CheckCircle, HelpCircle, Globe, MapPin, Search, Phone, MessageCircle } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import PropertyCard from '../components/PropertyCard'
 import PropertyCardSkeleton from '../components/PropertyCardSkeleton'
@@ -142,6 +142,38 @@ const Home = () => {
                   View All Properties
                   <ArrowRight size={18} className="sm:w-5 sm:h-5" />
                 </Link>
+              </div>
+
+              {/* Contact Information */}
+              <div className="text-center mt-8 sm:mt-12">
+                <div className="bg-green-50 rounded-2xl p-6 sm:p-8 max-w-2xl mx-auto border border-green-100">
+                  <div className="inline-flex items-center gap-2 bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium mb-4">
+                    <Phone size={16} />
+                    Need Help Booking?
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">Contact Us Directly</h3>
+                  <p className="text-gray-600 mb-6 text-sm sm:text-base">
+                    Call or WhatsApp us for immediate assistance with your booking
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
+                    <a
+                      href="tel:+254759589964"
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg"
+                    >
+                      <Phone size={18} />
+                      Call +254 759 589 964
+                    </a>
+                    <a
+                      href="https://wa.me/254759589964"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg"
+                    >
+                      <MessageCircle size={18} />
+                      WhatsApp
+                    </a>
+                  </div>
+                </div>
               </div>
             </>
           ) : (
