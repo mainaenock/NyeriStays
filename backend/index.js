@@ -49,6 +49,7 @@ app.use(cors({
         'https://nyeri-stays001.vercel.app',
         'https://nyeri-stays001.vercel.app/',
         'https://nyeri-stays.onrender.com', // Add your new Render frontend domain
+        'https://nyeri-stays-t8wa.onrender.com', // Add your actual frontend domain
         config.FRONTEND_URL
       ] 
     : ['http://localhost:5173', 'http://localhost:3000'],
