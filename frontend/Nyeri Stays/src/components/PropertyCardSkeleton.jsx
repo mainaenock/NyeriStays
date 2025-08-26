@@ -40,8 +40,8 @@ const PropertyCardSkeleton = () => {
         
         {/* Amenities skeleton */}
         <div className="flex items-center space-x-1.5 sm:space-x-2">
-          {[...Array(2)].map((_, i) => (
-            <div key={i} className="w-16 h-6 sm:w-20 sm:h-8 bg-gray-200 rounded-lg"></div>
+          {[...Array(3)].map((_, i) => (
+            <div key={i} className="w-8 h-8 sm:w-10 sm:h-10 bg-gray-200 rounded-lg"></div>
           ))}
         </div>
         

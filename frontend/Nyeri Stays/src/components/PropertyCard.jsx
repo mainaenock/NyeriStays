@@ -91,12 +91,12 @@ const PropertyCard = ({ property }) => {
           </button>
 
           {/* Price Badge */}
-          <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 bg-white/95 backdrop-blur-sm px-2 py-1 sm:px-4 sm:py-2 rounded-xl shadow-lg border border-white/20">
+          <div className="absolute bottom-2 sm:bottom-4 left-2 sm:left-4 bg-white/70 backdrop-blur-sm px-2 py-1 sm:px-4 sm:py-2 rounded-xl shadow-lg border border-white/30">
             <div className="text-center">
-              <span className="font-bold text-sm sm:text-lg text-gray-900">
+              <span className="font-bold text-xs sm:text-sm text-gray-900">
                 KES {(property.pricing?.pricePerNight || property.price || 0).toLocaleString()}
               </span>
-              <div className="text-gray-600 text-xs sm:text-sm">per night</div>
+              <div className="text-gray-600 text-xs">per night</div>
             </div>
           </div>
 
@@ -109,14 +109,14 @@ const PropertyCard = ({ property }) => {
         {/* Content */}
         <div className="p-3 sm:p-4 lg:p-5">
           {/* Title */}
-          <h3 className="font-bold text-gray-900 mb-2 sm:mb-3 group-hover:text-green-700 transition-colors text-sm sm:text-base lg:text-lg leading-tight line-clamp-2">
+          <h3 className="font-bold text-gray-900 mb-2 sm:mb-3 group-hover:text-green-700 transition-colors text-xs sm:text-sm lg:text-base leading-tight line-clamp-2">
             {property.title}
           </h3>
 
           {/* Location */}
           <div className="flex items-center text-gray-600 mb-2 sm:mb-3">
             <MapPin size={14} className="mr-1.5 sm:mr-2 text-green-600" />
-            <span className="text-xs sm:text-sm">
+            <span className="text-xs">
               {typeof property.location === 'string' 
                 ? property.location 
                 : `${property.location?.city || ''}, ${property.location?.state || ''}`
@@ -134,35 +134,34 @@ const PropertyCard = ({ property }) => {
                 showValue={false}
                 className="mr-1.5 sm:mr-2"
               />
-              <span className="font-semibold text-gray-900 text-xs sm:text-sm">{property.ratings?.average || property.rating || 0}</span>
+              <span className="font-semibold text-gray-900 text-xs">{property.ratings?.average || property.rating || 0}</span>
               <span className="text-gray-500 ml-1 text-xs">({property.ratings?.totalReviews || property.reviews || 0})</span>
             </div>
             
             {/* Capacity */}
             <div className="flex items-center text-gray-600">
               <Users size={14} className="mr-1" />
-              <span className="text-xs sm:text-sm">{property.capacity?.maxGuests || property.maxGuests || 1} guest{(property.capacity?.maxGuests || property.maxGuests || 1) > 1 ? 's' : ''}</span>
+              <span className="text-xs">{property.capacity?.maxGuests || property.maxGuests || 1} guest{(property.capacity?.maxGuests || property.maxGuests || 1) > 1 ? 's' : ''}</span>
             </div>
           </div>
 
           {/* Amenities */}
           <div className="flex items-center flex-wrap gap-1.5 sm:gap-2">
-            {(property.amenities || []).slice(0, 2).map((amenity, index) => (
-              <div key={index} className="flex items-center bg-green-50 text-green-700 px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg text-xs font-medium">
+            {(property.amenities || []).slice(0, 3).map((amenity, index) => (
+              <div key={index} className="flex items-center justify-center bg-green-50 text-green-700 w-8 h-8 sm:w-10 sm:h-10 rounded-lg">
                 {getAmenityIcon(amenity)}
-                <span className="ml-1 sm:ml-1.5 text-xs">{amenity}</span>
               </div>
             ))}
-            {(property.amenities || []).length > 2 && (
+            {(property.amenities || []).length > 3 && (
               <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-lg">
-                +{(property.amenities || []).length - 2} more
+                +{(property.amenities || []).length - 3} more
               </span>
             )}
           </div>
 
           {/* Hover Effect Indicator */}
           <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-gray-100">
-            <div className="flex items-center justify-between text-green-600 font-medium text-xs sm:text-sm">
+            <div className="flex items-center justify-between text-green-600 font-medium text-xs">
               <span>View Details</span>
               <div className="w-4 h-4 sm:w-5 sm:h-5 bg-green-100 rounded-full flex items-center justify-center group-hover:bg-green-200 transition-colors duration-200">
                 <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-green-600 rounded-full group-hover:scale-110 transition-transform duration-200"></div>
