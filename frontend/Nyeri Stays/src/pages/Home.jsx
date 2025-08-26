@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Users, Star, Heart, Shield, Award, Clock, ArrowRight, Play, CheckCircle, HelpCircle, Globe } from 'lucide-react'
+import { Users, Star, Heart, Shield, Award, Clock, ArrowRight, Play, CheckCircle, HelpCircle, Globe, MapPin } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import PropertyCard from '../components/PropertyCard'
 import PropertyCardSkeleton from '../components/PropertyCardSkeleton'
