@@ -292,34 +292,35 @@ const PropertyDetail = () => {
           <div className="xl:col-span-2 space-y-8">
             {/* Image Gallery Container */}
             <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-              <div className="p-6 border-b border-gray-200 bg-gradient-to-r from-gray-50 to-white">
-                <div className="flex items-center justify-between max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
-                  <div>
-                    <h2 className="text-xl font-bold text-gray-900 mb-1">Property Photos</h2>
-                    <p className="text-sm text-gray-600">Click on any image to view it in full size</p>
-                  </div>
-                  {propertyData.images && propertyData.images.length > 0 && (
-                    <div className="text-sm font-medium text-gray-700 bg-green-100 border border-green-200 px-4 py-2 rounded-full">
-                      📸 {propertyData.images.length} photo{propertyData.images.length !== 1 ? 's' : ''}
+              <div className="max-w-6xl mx-auto">
+                <div className="p-6 border-b border-gray-200 bg-gradient-to-r from-gray-50 to-white">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h2 className="text-xl font-bold text-gray-900 mb-1">Property Photos</h2>
+                      <p className="text-sm text-gray-600">Click on any image to view it in full size</p>
                     </div>
-                  )}
+                    {propertyData.images && propertyData.images.length > 0 && (
+                      <div className="text-sm font-medium text-gray-700 bg-green-100 border border-green-200 px-4 py-2 rounded-full">
+                        📸 {propertyData.images.length} photo{propertyData.images.length !== 1 ? 's' : ''}
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
-              
-              <div className="p-6">
-                <div className={`grid gap-2 p-1 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 ${
-                  propertyData.images && propertyData.images.length <= 4 
-                    ? 'grid-cols-2' 
-                    : propertyData.images && propertyData.images.length <= 6 
-                    ? 'grid-cols-2 sm:grid-cols-3' 
-                    : 'grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6'
-                }`}>
+                
+                <div className="p-6">
+                  <div className={`grid gap-2 p-1 mx-auto ${
+                    propertyData.images && propertyData.images.length <= 4 
+                      ? 'grid-cols-2 max-w-2xl' 
+                      : propertyData.images && propertyData.images.length <= 6 
+                      ? 'grid-cols-2 sm:grid-cols-3 max-w-3xl' 
+                      : 'grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 max-w-5xl'
+                  }`}>
                   {/* Display all images in a grid */}
                   {propertyData.images && propertyData.images.length > 0 ? (
                     propertyData.images.map((image, index) => (
                       <div
                         key={index}
-                        className={`relative overflow-hidden rounded-xl bg-gray-100 aspect-square flex items-center justify-center cursor-pointer group shadow-sm hover:shadow-lg transition-all duration-300 transform hover:scale-[1.02] min-h-[120px] sm:min-h-[140px] md:min-h-[160px]`}
+                        className={`relative overflow-hidden rounded-xl bg-gray-100 aspect-square flex items-center justify-center cursor-pointer group shadow-sm hover:shadow-lg transition-all duration-300 transform hover:scale-[1.02] min-h-[120px] sm:min-h-[140px] md:min-h-[160px] max-w-[300px] mx-auto`}
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
@@ -401,6 +402,7 @@ const PropertyDetail = () => {
                 </div>
               </div>
             </div>
+          </div>
 
             {/* Property Title and Location */}
             <div>
