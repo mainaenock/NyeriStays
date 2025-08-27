@@ -25,92 +25,99 @@ import HelpCenter from './pages/HelpCenter'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import Footer from './components/Footer'
 
-function App() {
+// Component to handle scroll behavior (must be inside Router)
+const AppContent = () => {
   // Ensure pages start at the top when navigating
   useScrollToTop()
 
   return (
+    <div className="min-h-screen bg-gray-50">
+      <Navbar />
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/properties" element={<PropertyList />} />
+          <Route path="/property/:id" element={<PropertyDetail />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
+          <Route path="/become-host" element={<BecomeHost />} />
+          <Route path="/legal" element={<Legal />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/help-center" element={<HelpCenter />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          
+          {/* Protected Routes */}
+          <Route 
+            path="/profile" 
+            element={
+              <ProtectedRoute requireAuth={true}>
+                <Profile />
+              </ProtectedRoute>
+            } 
+          />
+          
+          {/* Host Routes */}
+          <Route 
+            path="/host/dashboard" 
+            element={
+              <ProtectedRoute requireAuth={true} requireHost={true}>
+                <HostDashboard />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/host/bookings" 
+            element={
+              <ProtectedRoute requireAuth={true} requireHost={true}>
+                <HostBookings />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/host/properties/new" 
+            element={
+              <ProtectedRoute requireAuth={true} requireHost={true}>
+                <AddProperty />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/host/properties/:id/edit" 
+            element={
+              <ProtectedRoute requireAuth={true} requireHost={true}>
+                <EditProperty />
+              </ProtectedRoute>
+            } 
+          />
+          
+          {/* Admin Routes */}
+          <Route 
+            path="/admin/dashboard" 
+            element={
+              <ProtectedRoute requireAuth={true} requireAdmin={true}>
+                <AdminDashboard />
+              </ProtectedRoute>
+            } 
+          />
+          
+          {/* Catch-all route for SPA routing */}
+          <Route path="*" element={<Home />} />
+        </Routes>
+      </main>
+      <Footer />
+      <ScrollToTopButton />
+    </div>
+  )
+}
+
+function App() {
+  return (
     <AuthProvider>
       <Router>
-        <div className="min-h-screen bg-gray-50">
-          <Navbar />
-          <main>
-                                <Routes>
-                      <Route path="/" element={<Home />} />
-                      <Route path="/properties" element={<PropertyList />} />
-                      <Route path="/property/:id" element={<PropertyDetail />} />
-                      <Route path="/signup" element={<SignUp />} />
-                      <Route path="/login" element={<Login />} />
-                      <Route path="/forgot-password" element={<ForgotPassword />} />
-                      <Route path="/reset-password/:token" element={<ResetPassword />} />
-                      <Route path="/become-host" element={<BecomeHost />} />
-                      <Route path="/legal" element={<Legal />} />
-                      <Route path="/about" element={<About />} />
-                      <Route path="/contact" element={<Contact />} />
-                      <Route path="/help-center" element={<HelpCenter />} />
-                      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                      
-                      {/* Protected Routes */}
-                      <Route 
-                        path="/profile" 
-                        element={
-                          <ProtectedRoute requireAuth={true}>
-                            <Profile />
-                          </ProtectedRoute>
-                        } 
-                      />
-                      
-                      {/* Host Routes */}
-                      <Route 
-                        path="/host/dashboard" 
-                        element={
-                          <ProtectedRoute requireAuth={true} requireHost={true}>
-                            <HostDashboard />
-                          </ProtectedRoute>
-                        } 
-                      />
-                      <Route 
-                        path="/host/bookings" 
-                        element={
-                          <ProtectedRoute requireAuth={true} requireHost={true}>
-                            <HostBookings />
-                          </ProtectedRoute>
-                        } 
-                      />
-                      <Route 
-                        path="/host/properties/new" 
-                        element={
-                          <ProtectedRoute requireAuth={true} requireHost={true}>
-                            <AddProperty />
-                          </ProtectedRoute>
-                        } 
-                      />
-                      <Route 
-                        path="/host/properties/:id/edit" 
-                        element={
-                          <ProtectedRoute requireAuth={true} requireHost={true}>
-                            <EditProperty />
-                          </ProtectedRoute>
-                        } 
-                      />
-                      
-                      {/* Admin Routes */}
-                      <Route 
-                        path="/admin/dashboard" 
-                        element={
-                          <ProtectedRoute requireAuth={true} requireAdmin={true}>
-                            <AdminDashboard />
-                          </ProtectedRoute>
-                        } 
-                      />
-                      
-                      {/* Catch-all route for SPA routing */}
-                      <Route path="*" element={<Home />} />
-                    </Routes>
-          </main>
-          <Footer />
-          <ScrollToTopButton />
-        </div>
+        <AppContent />
       </Router>
     </AuthProvider>
   )
