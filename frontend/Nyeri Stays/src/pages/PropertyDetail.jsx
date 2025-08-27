@@ -300,7 +300,7 @@ const PropertyDetail = () => {
                       <p className="text-sm text-gray-600">Click on any image to view it in full size</p>
                     </div>
                     {propertyData.images && propertyData.images.length > 0 && (
-                      <div className="text-sm font-medium text-gray-700 bg-green-100 border border-green-200 px-4 py-2 rounded-full">
+                      <div className="text-sm font-medium text-gray-700 bg-green-100 border border-green-200 px-4 py-2 rounded-full mr-2">
                         📸 {propertyData.images.length} photo{propertyData.images.length !== 1 ? 's' : ''}
                       </div>
                     )}
