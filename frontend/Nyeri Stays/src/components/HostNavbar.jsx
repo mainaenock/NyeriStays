@@ -25,11 +25,11 @@ const HostNavbar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-sm border-b border-gray-200">
+    <nav className="bg-white shadow-lg border-b border-green-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
-            <Link to="/" className="flex items-center text-gray-500 hover:text-gray-700">
+            <Link to="/" className="flex items-center text-green-600 hover:text-green-700 transition-colors">
               <ArrowLeft size={20} className="mr-2" />
               Back to Site
             </Link>
@@ -46,8 +46,8 @@ const HostNavbar = () => {
                     to={item.href}
                     className={`flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors ${
                       isActive(item.href)
-                        ? 'text-blue-600 bg-blue-50'
-                        : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
+                        ? 'text-green-600 bg-green-50'
+                        : 'text-green-700 hover:text-green-800 hover:bg-green-50'
                     }`}
                   >
                     <Icon size={16} className="mr-2" />
@@ -59,14 +59,14 @@ const HostNavbar = () => {
 
             {/* User Menu */}
             <div className="flex items-center space-x-4">
-              <div className="text-sm text-gray-700">
+              <div className="text-sm text-green-700">
                 <span className="font-medium">{user?.firstName} {user?.lastName}</span>
-                <span className="text-gray-500 ml-2">(Host)</span>
+                <span className="text-green-600 ml-2">(Host)</span>
               </div>
               
               <button
                 onClick={logout}
-                className="flex items-center text-gray-500 hover:text-gray-700 transition-colors"
+                className="flex items-center text-green-600 hover:text-green-700 transition-colors"
               >
                 <LogOut size={16} className="mr-1" />
                 Logout
@@ -87,8 +87,8 @@ const HostNavbar = () => {
                 to={item.href}
                 className={`flex items-center px-3 py-2 text-base font-medium rounded-md transition-colors ${
                   isActive(item.href)
-                    ? 'text-blue-600 bg-blue-50'
-                    : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
+                    ? 'text-green-600 bg-green-50'
+                    : 'text-green-700 hover:text-green-800 hover:bg-green-50'
                 }`}
               >
                 <Icon size={16} className="mr-3" />
