@@ -228,11 +228,11 @@ const Legal = () => {
               </p>
               <div className="space-y-3">
                 <a 
-                  href="mailto:support@nyeristays.com" 
+                  href="mailto:nyeristays@gmail.com" 
                   className="flex items-center gap-2 text-green-600 hover:text-green-700 text-sm font-medium"
                 >
                   <Mail size={16} />
-                  support@nyeristays.com
+                  nyeristays@gmail.com
                 </a>
                 <a 
                   href="tel:+254759589964" 
