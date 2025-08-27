@@ -293,7 +293,7 @@ const PropertyDetail = () => {
             {/* Image Gallery Container */}
             <div className="bg-white rounded-xl shadow-lg overflow-hidden">
               <div className="max-w-6xl mx-auto">
-                <div className="p-6 border-b border-gray-200 bg-gradient-to-r from-gray-50 to-white">
+                <div className="p-8 border-b border-gray-200 bg-gradient-to-r from-gray-50 to-white">
                   <div className="flex items-center justify-between">
                     <div>
                       <h2 className="text-xl font-bold text-gray-900 mb-1">Property Photos</h2>
@@ -307,8 +307,8 @@ const PropertyDetail = () => {
                   </div>
                 </div>
                 
-                <div className="p-6">
-                  <div className={`grid gap-2 p-1 mx-auto ${
+                <div className="p-8">
+                  <div className={`grid gap-4 p-4 mx-auto ${
                     propertyData.images && propertyData.images.length <= 4 
                       ? 'grid-cols-2 max-w-2xl' 
                       : propertyData.images && propertyData.images.length <= 6 
