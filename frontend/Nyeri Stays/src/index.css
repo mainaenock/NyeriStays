@@ -35,10 +35,10 @@
   background: #047857;
 }
 
-/* Smooth scrolling */
-html {
+/* Smooth scrolling - removed to prevent auto-scrolling issues */
+/* html {
   scroll-behavior: smooth;
-}
+} */
 
 /* Custom animations */
 @keyframes float {

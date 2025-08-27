@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './contexts/AuthContext'
 import Navbar from './components/Navbar'
 import ProtectedRoute from './components/ProtectedRoute'
+import useScrollToTop from './hooks/useScrollToTop'
+import ScrollToTopButton from './components/ScrollToTopButton'
 import Home from './pages/Home'
 import PropertyList from './pages/PropertyList'
 import PropertyDetail from './pages/PropertyDetail'
@@ -24,6 +26,9 @@ import PrivacyPolicy from './pages/PrivacyPolicy'
 import Footer from './components/Footer'
 
 function App() {
+  // Ensure pages start at the top when navigating
+  useScrollToTop()
+
   return (
     <AuthProvider>
       <Router>
@@ -104,6 +109,7 @@ function App() {
                     </Routes>
           </main>
           <Footer />
+          <ScrollToTopButton />
         </div>
       </Router>
     </AuthProvider>
