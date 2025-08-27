@@ -3,7 +3,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { Phone, MessageCircle, Info } from 'lucide-react';
 
 const AdminContactButtons = ({ 
-  phoneNumber = "+254798578998",
+  phoneNumber = "+254759589964",
   whatsappMessage = "Hello, I need assistance.",
   className = "",
   showIcons = true,

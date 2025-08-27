@@ -235,11 +235,11 @@ const Legal = () => {
                   support@nyeristays.com
                 </a>
                 <a 
-                  href="tel:+254798578998" 
+                  href="tel:+254759589964" 
                   className="flex items-center gap-2 text-green-600 hover:text-green-700 text-sm font-medium"
                 >
                   <Phone size={16} />
-                  +254 798 578 998
+                  +254 759 589 964
                 </a>
               </div>
             </div>
