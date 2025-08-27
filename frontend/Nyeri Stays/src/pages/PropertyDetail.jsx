@@ -23,6 +23,11 @@ const PropertyDetail = () => {
   const [bookingLoading, setBookingLoading] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
   const [showImageModal, setShowImageModal] = useState(false);
+  
+  // Debug state changes
+  useEffect(() => {
+    console.log('Modal state changed:', { showImageModal, selectedImageIndex });
+  }, [showImageModal, selectedImageIndex]);
   // Booking feedback states
   const [bookingSuccess, setBookingSuccess] = useState(null);
   const [bookingError, setBookingError] = useState(null);
@@ -319,8 +324,12 @@ const PropertyDetail = () => {
                           alt={`${propertyData.title} - Photo ${index + 1}`}
                           className="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-300"
                           onClick={() => {
+                            console.log('Image clicked:', index);
+                            console.log('Setting selectedImageIndex to:', index);
+                            console.log('Setting showImageModal to true');
                             setSelectedImageIndex(index);
                             setShowImageModal(true);
+                            console.log('State updated, modal should open');
                           }}
                           onError={(e) => {
                             e.target.style.display = 'none';
@@ -635,14 +644,20 @@ const PropertyDetail = () => {
         </div>
       </div>
       {/* Image Modal */}
+      {console.log('Modal render check:', { showImageModal, selectedImageIndex, hasImages: propertyData?.images?.length })}
       {showImageModal && selectedImageIndex !== null && (
-        <ImageModal
-          images={propertyData?.images || []}
-          currentIndex={selectedImageIndex}
-          isOpen={showImageModal}
-          onClose={() => setShowImageModal(false)}
-          onNavigate={setSelectedImageIndex}
-        />
+        <div className="fixed inset-0 bg-black bg-opacity-95 z-50 flex items-center justify-center">
+          <div className="bg-white p-8 rounded-lg">
+            <h2>Test Modal - Image {selectedImageIndex + 1}</h2>
+            <p>Modal is working!</p>
+            <button 
+              onClick={() => setShowImageModal(false)}
+              className="bg-blue-500 text-white px-4 py-2 rounded"
+            >
+              Close
+            </button>
+          </div>
+        </div>
       )}
     </div>
   )
