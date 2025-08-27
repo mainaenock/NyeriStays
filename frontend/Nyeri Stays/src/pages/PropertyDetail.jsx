@@ -316,14 +316,26 @@ const PropertyDetail = () => {
                     propertyData.images.map((image, index) => (
                       <div
                         key={index}
-                        className={`relative overflow-hidden rounded-lg bg-gray-100 aspect-square flex items-center justify-center`}
+                        className={`relative overflow-hidden rounded-lg bg-gray-100 aspect-square flex items-center justify-center cursor-pointer`}
                         style={{ height: '100%' }}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          console.log('Container clicked:', index);
+                          console.log('Setting selectedImageIndex to:', index);
+                          console.log('Setting showImageModal to true');
+                          setSelectedImageIndex(index);
+                          setShowImageModal(true);
+                          console.log('State updated, modal should open');
+                        }}
                       >
                         <img
                           src={image}
                           alt={`${propertyData.title} - Photo ${index + 1}`}
                           className="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-300"
-                          onClick={() => {
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
                             console.log('Image clicked:', index);
                             console.log('Setting selectedImageIndex to:', index);
                             console.log('Setting showImageModal to true');
@@ -373,6 +385,20 @@ const PropertyDetail = () => {
                 {/* Image counter */}
                 <div className="mt-4 text-center text-sm text-gray-600">
                   {propertyData.images && propertyData.images.length > 0 ? `${propertyData.images.length} photos available` : 'No photos available'}
+                  
+                  {/* Test button */}
+                  <div className="mt-2">
+                    <button 
+                      onClick={() => {
+                        console.log('Test button clicked');
+                        setSelectedImageIndex(0);
+                        setShowImageModal(true);
+                      }}
+                      className="bg-blue-500 text-white px-4 py-2 rounded text-xs"
+                    >
+                      Test Modal (Image 1)
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
