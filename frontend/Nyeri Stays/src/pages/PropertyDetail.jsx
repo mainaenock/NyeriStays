@@ -292,28 +292,28 @@ const PropertyDetail = () => {
           <div className="xl:col-span-2 space-y-8">
             {/* Image Gallery Container */}
             <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-              <div className="p-4 border-b border-gray-200">
+              <div className="p-6 border-b border-gray-200 bg-gradient-to-r from-gray-50 to-white">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h2 className="text-lg font-semibold text-gray-900">Property Photos</h2>
+                    <h2 className="text-xl font-bold text-gray-900 mb-1">Property Photos</h2>
                     <p className="text-sm text-gray-600">Click on any image to view it in full size</p>
                   </div>
                   {propertyData.images && propertyData.images.length > 0 && (
-                    <div className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
-                      {propertyData.images.length} photo{propertyData.images.length !== 1 ? 's' : ''}
+                    <div className="text-sm font-medium text-gray-700 bg-green-100 border border-green-200 px-4 py-2 rounded-full">
+                      📸 {propertyData.images.length} photo{propertyData.images.length !== 1 ? 's' : ''}
                     </div>
                   )}
                 </div>
               </div>
               
-              <div className="p-4">
-                <div className="grid grid-cols-2 gap-3 h-64 sm:h-80 md:h-96 lg:h-[500px] xl:h-[600px]">
+              <div className="p-6">
+                <div className="grid grid-cols-2 gap-3 h-64 sm:h-80 md:h-96 lg:h-[500px] xl:h-[600px] p-1">
                   {/* Display all images in a grid */}
                   {propertyData.images && propertyData.images.length > 0 ? (
                     propertyData.images.map((image, index) => (
                       <div
                         key={index}
-                        className={`relative overflow-hidden rounded-lg bg-gray-100 aspect-square flex items-center justify-center cursor-pointer`}
+                        className={`relative overflow-hidden rounded-xl bg-gray-100 aspect-square flex items-center justify-center cursor-pointer group shadow-sm hover:shadow-lg transition-all duration-300 transform hover:scale-[1.02]`}
                         style={{ height: '100%' }}
                         onClick={(e) => {
                           e.preventDefault();
@@ -332,8 +332,8 @@ const PropertyDetail = () => {
                           }}
                         />
                         {/* Hover overlay with zoom icon */}
-                        <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center opacity-0 hover:opacity-100">
-                          <div className="bg-white bg-opacity-90 rounded-full p-2">
+                        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                          <div className="bg-white bg-opacity-95 rounded-full p-3 shadow-lg transform scale-0 group-hover:scale-100 transition-transform duration-300">
                             <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
                             </svg>
@@ -366,10 +366,15 @@ const PropertyDetail = () => {
                 </div>
                 
                 {/* Image counter */}
-                <div className="mt-4 text-center text-sm text-gray-600">
-                  {propertyData.images && propertyData.images.length > 0 ? `${propertyData.images.length} photos available` : 'No photos available'}
-                  
-
+                <div className="mt-6 text-center">
+                  <div className="inline-flex items-center space-x-2 bg-gray-50 border border-gray-200 rounded-full px-4 py-2">
+                    <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <span className="text-sm font-medium text-gray-700">
+                      {propertyData.images && propertyData.images.length > 0 ? `${propertyData.images.length} photos available` : 'No photos available'}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
