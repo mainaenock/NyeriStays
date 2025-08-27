@@ -293,7 +293,7 @@ const PropertyDetail = () => {
             {/* Image Gallery Container */}
             <div className="bg-white rounded-xl shadow-lg overflow-hidden">
               <div className="p-6 border-b border-gray-200 bg-gradient-to-r from-gray-50 to-white">
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
                   <div>
                     <h2 className="text-xl font-bold text-gray-900 mb-1">Property Photos</h2>
                     <p className="text-sm text-gray-600">Click on any image to view it in full size</p>
@@ -307,12 +307,12 @@ const PropertyDetail = () => {
               </div>
               
               <div className="p-6">
-                <div className={`grid gap-2 p-1 ${
+                <div className={`grid gap-2 p-1 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 ${
                   propertyData.images && propertyData.images.length <= 4 
                     ? 'grid-cols-2' 
                     : propertyData.images && propertyData.images.length <= 6 
                     ? 'grid-cols-2 sm:grid-cols-3' 
-                    : 'grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'
+                    : 'grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6'
                 }`}>
                   {/* Display all images in a grid */}
                   {propertyData.images && propertyData.images.length > 0 ? (
