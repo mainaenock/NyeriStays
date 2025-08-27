@@ -307,14 +307,19 @@ const PropertyDetail = () => {
               </div>
               
               <div className="p-6">
-                <div className="grid grid-cols-2 gap-3 h-64 sm:h-80 md:h-96 lg:h-[500px] xl:h-[600px] p-1">
+                <div className={`grid gap-2 p-1 ${
+                  propertyData.images && propertyData.images.length <= 4 
+                    ? 'grid-cols-2' 
+                    : propertyData.images && propertyData.images.length <= 6 
+                    ? 'grid-cols-2 sm:grid-cols-3' 
+                    : 'grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'
+                }`}>
                   {/* Display all images in a grid */}
                   {propertyData.images && propertyData.images.length > 0 ? (
                     propertyData.images.map((image, index) => (
                       <div
                         key={index}
-                        className={`relative overflow-hidden rounded-xl bg-gray-100 aspect-square flex items-center justify-center cursor-pointer group shadow-sm hover:shadow-lg transition-all duration-300 transform hover:scale-[1.02]`}
-                        style={{ height: '100%' }}
+                        className={`relative overflow-hidden rounded-xl bg-gray-100 aspect-square flex items-center justify-center cursor-pointer group shadow-sm hover:shadow-lg transition-all duration-300 transform hover:scale-[1.02] min-h-[120px] sm:min-h-[140px] md:min-h-[160px]`}
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
@@ -326,6 +331,7 @@ const PropertyDetail = () => {
                           src={image}
                           alt={`${propertyData.title} - Photo ${index + 1}`}
                           className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                          loading="lazy"
                           onError={(e) => {
                             e.target.style.display = 'none';
                             e.target.nextSibling.style.display = 'flex';
@@ -365,8 +371,8 @@ const PropertyDetail = () => {
                   )}
                 </div>
                 
-                {/* Image counter */}
-                <div className="mt-6 text-center">
+                {/* Image counter and actions */}
+                <div className="mt-6 text-center space-y-3">
                   <div className="inline-flex items-center space-x-2 bg-gray-50 border border-gray-200 rounded-full px-4 py-2">
                     <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -375,6 +381,23 @@ const PropertyDetail = () => {
                       {propertyData.images && propertyData.images.length > 0 ? `${propertyData.images.length} photos available` : 'No photos available'}
                     </span>
                   </div>
+                  
+                  {propertyData.images && propertyData.images.length > 6 && (
+                    <div>
+                      <button 
+                        onClick={() => {
+                          setSelectedImageIndex(0);
+                          setShowImageModal(true);
+                        }}
+                        className="inline-flex items-center space-x-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200"
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                        </svg>
+                        <span>View All Photos</span>
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
