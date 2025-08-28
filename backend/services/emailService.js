@@ -202,7 +202,7 @@ const sendEmail = async (to, template, data = {}) => {
     const emailTemplate = emailTemplates[template](data.url, data.userName);
     
     const mailOptions = {
-      from: process.env.EMAIL_FROM || 'campusroomske@gmail.com',
+      from: process.env.EMAIL_FROM || 'nyeristays@gmail.com',
       to: to,
       subject: emailTemplate.subject,
       html: emailTemplate.html

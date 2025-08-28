@@ -63,7 +63,7 @@ A comprehensive REST API for the Nyeri Stays accommodation booking platform buil
    JWT_EXPIRE=7d
 
    # Email Configuration
-   EMAIL_FROM=campusroomske@gmail.com
+   EMAIL_FROM=nyeristays@gmail.com
    EMAIL_PASSWORD=your-email-password
 
    # Frontend URL
@@ -260,7 +260,7 @@ Authorization: Bearer <your-jwt-token>
 | `MONGODB_URI` | MongoDB connection string | mongodb://localhost:27017/nyeri-stays |
 | `JWT_SECRET` | JWT signing secret | Required |
 | `JWT_EXPIRE` | JWT expiration time | 7d |
-| `EMAIL_FROM` | Email sender address | campusroomske@gmail.com |
+| `EMAIL_FROM` | Email sender address | nyeristays@gmail.com |
 | `EMAIL_PASSWORD` | Email password | Required |
 | `FRONTEND_URL` | Frontend application URL | http://localhost:5173 |
 
@@ -307,4 +307,4 @@ This project is licensed under the MIT License.
 
 ## 🆘 Support
 
-For support, email info@nyeristays.com or create an issue in the repository. 
+For support, email nyeristays@gmail.com or create an issue in the repository. 

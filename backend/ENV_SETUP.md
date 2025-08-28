@@ -24,7 +24,7 @@ JWT_EXPIRE=7d
 FRONTEND_URL=http://localhost:5173
 
 # Email Configuration
-EMAIL_FROM=campusroomske@gmail.com
+EMAIL_FROM=nyeristays@gmail.com
 EMAIL_PASSWORD=your-email-app-password
 
 # File Upload Configuration
@@ -40,7 +40,7 @@ The application will use these defaults if no `.env` file is provided:
 - **JWT_SECRET**: `nyeri-stays-jwt-secret-key-2024-development`
 - **JWT_EXPIRE**: `7d`
 - **FRONTEND_URL**: `http://localhost:5173`
-- **EMAIL_FROM**: `campusroomske@gmail.com`
+- **EMAIL_FROM**: `nyeristays@gmail.com`
 - **MAX_FILE_SIZE**: `5MB`
 
 ## Email Setup (Optional)
